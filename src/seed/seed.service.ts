@@ -13,10 +13,11 @@ export class SeedService implements OnModuleInit {
     @InjectModel(User.name) private userModel: Model<User>,
     @InjectModel(TVShow.name) private tvShowModel: Model<TVShow>,
     @InjectModel(Movie.name) private movieModel: Model<Movie>,
-  ) {}
+  ) {
+  }
 
   async onModuleInit() {
-    await this.seedDatabase();
+    // await this.seedDatabase();
   }
 
   async seedDatabase() {

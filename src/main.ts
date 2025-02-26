@@ -3,6 +3,9 @@ import { AppModule } from './app.module';
 import { ValidationPipe } from '@nestjs/common';
 import 'reflect-metadata';
 import { SwaggerModule, DocumentBuilder } from '@nestjs/swagger';
+import { ConfigService } from '@nestjs/config';
+import * as dotenv from 'dotenv'
+dotenv.config();
 
 async function bootstrap() {
   const app = await NestFactory.create(AppModule);
@@ -13,13 +16,17 @@ async function bootstrap() {
     allowedHeaders: '*',
     credentials: true,
   });
+
+  const configService = app.get(ConfigService);
+  const port = configService.get('port');
+
   const config = new DocumentBuilder()
     .setTitle('Stage Api docs')
     .setDescription(
       'Have all the routes documentation for user, movies and tvshows',
     )
     .setVersion('1.0')
-    .addServer('http://127.0.0.1:3000', 'Default Server')
+    .addServer(`http://127.0.0.1:${port}`, 'Default Server')
     .build();
   const document = SwaggerModule.createDocument(app, config);
   SwaggerModule.setup('api', app, document);
@@ -30,6 +37,6 @@ async function bootstrap() {
       whitelist: true,
     }),
   );
-  await app.listen(3000);
+  await app.listen(port);
 }
 bootstrap();
