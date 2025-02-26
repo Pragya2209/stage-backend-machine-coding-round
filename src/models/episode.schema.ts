@@ -5,13 +5,13 @@ export type EpisodeDocument = Episode & Document;
 
 @Schema()
 export class Episode {
-  @Prop({ required: true })
+  @Prop({ required: true, index: true })
   episodeNumber: number;
 
   @Prop({ required: true })
   seasonNumber: number;
 
-  @Prop({ required: true })
+  @Prop({ required: true, index: true })
   releaseDate: Date;
 
   @Prop({ required: true })

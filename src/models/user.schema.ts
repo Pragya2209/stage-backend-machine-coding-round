@@ -5,7 +5,7 @@ import { genre } from '../constants/constants';
 
 @Schema()
 export class User {
-  @Prop({ required: true })
+  @Prop({ required: true, unique: true, index: true })
   username: string;
 
   @Prop({

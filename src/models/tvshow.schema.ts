@@ -7,7 +7,7 @@ export type TVShowDocument = TVShow & Document;
 
 @Schema()
 export class TVShow {
-  @Prop({ required: true })
+  @Prop({ required: true, index: true })
   title: string;
 
   @Prop({ required: true })
